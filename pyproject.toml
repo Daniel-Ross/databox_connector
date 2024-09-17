@@ -1,0 +1,18 @@
+[project]
+name = "databox_connector"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "Dan Ross", email = "daniel.ross@aop.com"},
+]
+dependencies = [
+    "databox==2.1.4",
+    "python-dotenv>=1.0.1",
+]
+requires-python = "==3.12.*"
+readme = "README.md"
+license = {text = "MIT"}
+
+
+[tool.pdm]
+distribution = false
