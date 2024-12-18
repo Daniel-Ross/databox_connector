@@ -1,10 +1,12 @@
 [project]
 name = "databox-connector"
 version = "0.1.0"
-description = "Add your description here"
+description = "Create records for and push them to Databox"
 readme = "README.md"
+authors = [{ name = "Dan Ross", email = "daniel.ross@aop.com" }]
 requires-python = ">=3.11"
-dependencies = [
-    "databox>=2.2.2",
-    "python-dotenv>=1.0.1",
-]
+dependencies = ["databox>=2.2.2", "python-dotenv>=1.0.1"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
