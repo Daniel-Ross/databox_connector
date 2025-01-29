@@ -47,7 +47,7 @@ def create_databox_dimensioned_records(records, metric_name, dim_type, date_colu
         metric_name (str): Name of the metric
         dim_type (_type_): _description_
         date_column (str): Date column
-        count_column (float or int): Column to use for count values
+        count_column (str): Column to use for count values
 
     Returns:
         list[dict] : List of record dictionaries
