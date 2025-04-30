@@ -1,8 +1,9 @@
-from dotenv import dotenv_values
+from dotenv import load_dotenv
 from dataclasses import dataclass, asdict
 import databox
+import os
 
-config = dotenv_values()
+load_dotenv()
 
 
 # Create classes for Databox metrics
@@ -79,7 +80,7 @@ def push_data(data):
     # The API token is used as the username for authentication
     # It's recommended to store your API token securely, e.g., in an environment variable
     configuration = databox.Configuration(  # type:ignore
-        host="https://push.databox.com", username=config["databox_token"], password=""
+        host="https://push.databox.com", username=os.getenv("databox_token"), password=""
     )
 
     # It's crucial to specify the correct Accept header for the API request
