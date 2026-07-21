@@ -69,41 +69,24 @@ def create_databox_dimensioned_records(records, metric_name, dim_type, date_colu
 # databox_client = Client(config["databox_token"])
 
 
-def push_data(data):
+def push_data(data, token=os.getenv("databox_token")):
     """Function to push data to Databox
 
     Args:
         data (list[dict]): List of dictionaries to push to Databox
     """
-    ### New version of SDK
-    # Configuration setup for the Databox API client
-    # The API token is used as the username for authentication
-    # It's recommended to store your API token securely, e.g., in an environment variable
     configuration = databox.Configuration(  # type:ignore
-        host="https://push.databox.com", username=os.getenv("databox_token"), password=""
+        host="https://push.databox.com", username=token, password=""
     )
 
-    # It's crucial to specify the correct Accept header for the API request
     with databox.ApiClient(  # type:ignore
         configuration,
         "Accept",
         "application/vnd.databox.v2+json",
     ) as api_client:
         api_instance = databox.DefaultApi(api_client)  # type:ignore
-
-        # Define the data to be pushed to the Databox Push API# Prepare the data you want to push to Databox
-        # The 'key' should match a metric in your Databox account, 'value' is the data point, 'unit' is optional, and 'date' is the timestamp of the data point
-        # push_data = [
-        #     {
-        #         "key": "sales2",
-        #         "value": 100,
-        #         "unit": "USD",
-        #         "date": "2021-01-01T00:00:00Z",
-        #     }
-        # ]
         push_data = data
         try:
             api_instance.data_post(push_data=push_data)
         except Exception as e:
-            # Handle any other unexpected exceptions
             print("An unexpected error occurred: %s\n" % e)
