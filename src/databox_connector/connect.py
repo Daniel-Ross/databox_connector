@@ -22,6 +22,18 @@ class DataboxDimmedEntry:
     attributes: list[dict]
 
 
+@dataclass
+class MigratedDatasetEntry:
+    dateInserted: str
+    metricKey: str
+    metricName: str
+    value: int
+    unit: str
+    periodFrom: str
+    periodTo: str
+    dimension: str
+
+
 def create_databox_records(databox_dict, metric_name):
     """Create non-dimension Databox records
 
@@ -91,7 +103,7 @@ def push_data(data, token=os.getenv("databox_token")):
         except Exception as e:
             print("An unexpected error occurred: %s\n" % e)
 
-def create_dataset_records():
+def create_migrated_dataset_records(metric_name:str, datasetId:str):
     pass
 
 def push_dataset_records():
