@@ -90,3 +90,9 @@ def push_data(data, token=os.getenv("databox_token")):
             api_instance.data_post(push_data=push_data)
         except Exception as e:
             print("An unexpected error occurred: %s\n" % e)
+
+def create_dataset_records():
+    pass
+
+def push_dataset_records():
+    pass
