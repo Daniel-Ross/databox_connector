@@ -1,9 +1,13 @@
 from dotenv import load_dotenv
 from dataclasses import dataclass, asdict
 import databox
+from datetime import datetime, timezone
 import os
 
 load_dotenv()
+
+
+now = datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
 
 
 # Create classes for Databox metrics
@@ -78,9 +82,6 @@ def create_databox_dimensioned_records(records, metric_name, dim_type, date_colu
     return entries
 
 
-# databox_client = Client(config["databox_token"])
-
-
 def push_data(data, token=os.getenv("databox_token")):
     """Function to push data to Databox
 
@@ -103,8 +104,31 @@ def push_data(data, token=os.getenv("databox_token")):
         except Exception as e:
             print("An unexpected error occurred: %s\n" % e)
 
-def create_migrated_dataset_records(metric_name:str, datasetId:str):
-    pass
 
-def push_dataset_records():
+def create_migrated_dataset_records(
+    records: list[dict],
+    metric_name: str,
+    metric_key: str,
+    value_col: str,
+    date_col: str,
+    dimension_col: str = "",
+):
+    entries = []
+    for record in records:
+        entry = MigratedDatasetEntry(
+            dateInserted=now,
+            metricKey=metric_key,
+            metricName=metric_name,
+            value=round(record[value_col], 2),
+            unit="",
+            periodFrom=record[date_col],
+            periodTo=record[date_col],
+            dimension=record[dimension_col],
+        )
+        entries.append(asdict(entry))
+        return entries
+
+
+def push_dataset_records(records):
+    # TODO: We need to ensure that only 100 records are sent at a time
     pass
