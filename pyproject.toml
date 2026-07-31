@@ -5,7 +5,11 @@ description = "Create records for and push them to Databox"
 readme = "README.md"
 authors = [{ name = "Dan Ross", email = "daniel.ross@aop.com" }]
 requires-python = ">=3.11"
-dependencies = ["databox>=2.2.2", "python-dotenv>=1.0.1"]
+dependencies = [
+    "databox>=2.2.2",
+    "python-dotenv>=1.0.1",
+    "requests>=2.34.2",
+]
 
 [build-system]
 requires = ["hatchling"]
